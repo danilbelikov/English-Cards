@@ -1,10 +1,13 @@
 package com.example.englishcards.ui.main
 
+import android.graphics.ColorSpace.Model
 import android.os.Bundle
+import android.view.Display.Mode
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.englishcards.R
@@ -18,6 +21,7 @@ class MainFragment : Fragment() {
     private lateinit var adapter: CardsAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var cardsArrayList: ArrayList<CardsIntro>
+
 
     lateinit var heading: Array<String>
     lateinit var progress: Array<String>
@@ -38,24 +42,35 @@ class MainFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        adapter = CardsAdapter(cardsArrayList)
+        var adapter = CardsAdapter(cardsArrayList)
         recyclerView.adapter = adapter
+        adapter.setOnItemClickListener(object : CardsAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+
+                Toast.makeText(activity, "You clicked on $position", Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     private fun dataInitialize() {
         cardsArrayList = arrayListOf<CardsIntro>()
+
         heading = arrayOf(
             getString(R.string.common_words),
             getString(R.string.Basic_words),
+            getString(R.string.hard_words)
         )
         progress = arrayOf(
             getString(R.string.progress1),
-            getString(R.string.progress1)
+            getString(R.string.progress2),
+            getString(R.string.progress3)
         )
         for (i in heading.indices) {
             val cards = CardsIntro(heading[i], progress[i])
             cardsArrayList.add(cards)
         }
+
     }
 
 }

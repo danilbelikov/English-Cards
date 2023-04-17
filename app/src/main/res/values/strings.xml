@@ -2,10 +2,16 @@
     <string name="app_name">EnglishCards</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="common_words">Common Words</string>
+
     <string name="practice">practice</string>
     <string name="_0_50">Изучено 0 слов из 50</string>
 
+    //Названия заголовков
     <string name="Basic_words">Basic words</string>
+    <string name="common_words">Common Words</string>
+    <string name="hard_words">Hard Words</string>
+    //Прогрессы
     <string name="progress1">0 слов из 50 изучено</string>
+    <string name="progress2">0 слов из 50 изучено</string>
+    <string name="progress3">0 слов из 50 изучено</string>
 </resources>
