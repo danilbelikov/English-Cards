@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.englishcards.R
@@ -41,8 +42,15 @@ class MainFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        adapter = CardsAdapter(cardsArrayList)
+        var adapter = CardsAdapter(cardsArrayList)
         recyclerView.adapter = adapter
+        adapter.setOnItemClickListener(object : CardsAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+
+                Toast.makeText(activity, "You clicked on $position", Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     private fun dataInitialize() {
@@ -61,9 +69,8 @@ class MainFragment : Fragment() {
         for (i in heading.indices) {
             val cards = CardsIntro(heading[i], progress[i])
             cardsArrayList.add(cards)
-
-
         }
+
     }
 
 }
