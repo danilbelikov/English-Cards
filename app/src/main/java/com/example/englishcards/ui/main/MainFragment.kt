@@ -1,6 +1,8 @@
 package com.example.englishcards.ui.main
 
+import android.graphics.ColorSpace.Model
 import android.os.Bundle
+import android.view.Display.Mode
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +20,7 @@ class MainFragment : Fragment() {
     private lateinit var adapter: CardsAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var cardsArrayList: ArrayList<CardsIntro>
+
 
     lateinit var heading: Array<String>
     lateinit var progress: Array<String>
@@ -44,17 +47,22 @@ class MainFragment : Fragment() {
 
     private fun dataInitialize() {
         cardsArrayList = arrayListOf<CardsIntro>()
+
         heading = arrayOf(
             getString(R.string.common_words),
             getString(R.string.Basic_words),
+            getString(R.string.hard_words)
         )
         progress = arrayOf(
             getString(R.string.progress1),
-            getString(R.string.progress1)
+            getString(R.string.progress2),
+            getString(R.string.progress3)
         )
         for (i in heading.indices) {
             val cards = CardsIntro(heading[i], progress[i])
             cardsArrayList.add(cards)
+
+
         }
     }
 

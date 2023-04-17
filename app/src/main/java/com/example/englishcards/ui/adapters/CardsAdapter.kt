@@ -1,12 +1,15 @@
 package com.example.englishcards.ui.adapters
 
+import android.graphics.ColorSpace.Model
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.englishcards.R
 import com.example.englishcards.ui.model.CardsIntro
+import com.example.englishcards.ui.word.WordFragment
 
 class CardsAdapter(private val cardsList: ArrayList<CardsIntro>) :
     RecyclerView.Adapter<CardsAdapter.CardsViewHolder>() {
@@ -23,9 +26,12 @@ class CardsAdapter(private val cardsList: ArrayList<CardsIntro>) :
     }
 
     override fun onBindViewHolder(holder: CardsViewHolder, position: Int) {
+
         val currentItem = cardsList[position]
         holder.tvHeading.text = currentItem.name
         holder.tvProgress.text = currentItem.progress
+
+
     }
 
     class CardsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
