@@ -1,5 +1,6 @@
 package com.example.englishcards.ui.main
 
+import android.content.Intent
 import android.graphics.ColorSpace.Model
 import android.os.Bundle
 import android.view.Display.Mode
@@ -13,18 +14,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.englishcards.R
 import com.example.englishcards.databinding.FragmentMainBinding
 import com.example.englishcards.ui.adapters.CardsAdapter
+import com.example.englishcards.ui.contract.navigator
 import com.example.englishcards.ui.model.CardsIntro
+import com.example.englishcards.ui.word.WordFragment
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
-
-    private lateinit var adapter: CardsAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var cardsArrayList: ArrayList<CardsIntro>
-
-
     lateinit var heading: Array<String>
     lateinit var progress: Array<String>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,11 +45,19 @@ class MainFragment : Fragment() {
         var adapter = CardsAdapter(cardsArrayList)
         recyclerView.adapter = adapter
         adapter.setOnItemClickListener(object : CardsAdapter.OnItemClickListener{
+
+
             override fun onItemClick(position: Int) {
-
-                Toast.makeText(activity, "You clicked on $position", Toast.LENGTH_SHORT).show()
+                if (position == 0) {
+                    navigator().goToCards1()
+                }
+                if (position == 1) {
+                    navigator().goToCards2()
+                }
+                if (position == 2) {
+                    navigator().goToCards3()
+                }
             }
-
         })
     }
 
