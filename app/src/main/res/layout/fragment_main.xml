@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.MainFragment"
+    android:id="@+id/mainFragment"
     android:background="@color/mainBackground">
 
     <FrameLayout
