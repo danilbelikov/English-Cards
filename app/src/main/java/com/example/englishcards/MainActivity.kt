@@ -2,6 +2,7 @@ package com.example.englishcards
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.example.englishcards.ui.contract.Navigator
 import com.example.englishcards.ui.main.MainFragment
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity(), Navigator {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         replaceFragment(MainFragment())
+
 
     }
 
