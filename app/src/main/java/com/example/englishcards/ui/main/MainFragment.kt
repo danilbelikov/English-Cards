@@ -25,6 +25,7 @@ class MainFragment : Fragment() {
     lateinit var heading: Array<String>
     lateinit var progress: Array<String>
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
