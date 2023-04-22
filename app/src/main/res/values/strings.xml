@@ -19,4 +19,5 @@
     <string name="привет">Привет</string>
     <string name="tap_to_see">Посмотреть значение слова ➔</string>
     <string name="new_word">NEW WORD</string>
+    <string name="dont_know_word">я не знаю это слово</string>
 </resources>
