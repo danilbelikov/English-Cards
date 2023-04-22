@@ -14,9 +14,11 @@ import com.example.englishcards.ui.word.WordFragment
 class CardsAdapter(private val cardsList: ArrayList<CardsIntro>) :
     RecyclerView.Adapter<CardsAdapter.CardsViewHolder>() {
     private lateinit var mListener : OnItemClickListener
+
     interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
+
 
     fun setOnItemClickListener (listener: OnItemClickListener) {
         mListener = listener

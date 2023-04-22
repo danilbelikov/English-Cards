@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,6 +46,10 @@ class MainFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         var adapter = CardsAdapter(cardsArrayList)
         recyclerView.adapter = adapter
+        val button = view?.findViewById<Button>(R.id.buttonPractice)
+        button?.setOnClickListener {
+            navigator().goToCards1()
+        }
         adapter.setOnItemClickListener(object : CardsAdapter.OnItemClickListener{
 
 
@@ -58,9 +63,11 @@ class MainFragment : Fragment() {
                 if (position == 2) {
                     navigator().goToCards3()
                 }
+
             }
         })
     }
+
 
     private fun dataInitialize() {
         cardsArrayList = arrayListOf<CardsIntro>()
@@ -79,6 +86,8 @@ class MainFragment : Fragment() {
             val cards = CardsIntro(heading[i], progress[i])
             cardsArrayList.add(cards)
         }
+
+
 
     }
 
