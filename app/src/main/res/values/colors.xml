@@ -10,4 +10,5 @@
     <color name="greenProgress">#4dff4d</color>
     <color name="grayProgress">#e6e6e6</color>
     <color name="mainBackground">#89e8e0</color>
+    <color name="learningBackground">#ffff00</color>
 </resources>
