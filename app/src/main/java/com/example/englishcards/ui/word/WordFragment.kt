@@ -1,5 +1,6 @@
 package com.example.englishcards.ui.word
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.transition.Explode
 import android.transition.TransitionManager
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.englishcards.R
 import com.example.englishcards.databinding.FragmentWordBinding
@@ -91,17 +93,29 @@ lateinit var status: Array<String>
         val adapter = ListAdapter(requireActivity(), cardArrayList)
         binding.listView.adapter = adapter
 
-        //masteredWords.clear()
+        //Для передачи на маин активити
         numberOfMasteredWords = masteredWords.size
+        //Сколько раз повторили
         var numberOfRepeatings = 0
+
+        val progressBar = view?.findViewById<ProgressBar>(R.id.progress_bar_mastered)
+        val progressBarLearning = view?.findViewById<ProgressBar>(R.id.progress_bar_learning)
+        var progressMastered = 0
+        var progressLearning = 0
+
+        progressBar?.max = word.size
+        progressBarLearning?.max = word.size
 
 adapter.onItemClick = { any: Any, view: View ->
     var randomNumber = (0..6).random()
 
 
-
     if (any == 1) {
 
+        if (cardArrayList[0].status == status[2]){
+            cardArrayList[0].status = status[0]
+            masteredWords.remove(cardArrayList[0])
+        }
         //todo если ТЕКУЩЕЕ слово содержится в списке ИЗУЧЕНИЯ тогда удаляем
         if (learningWords.contains(cardArrayList[0])) {
             numberOfRepeatings += 1
@@ -126,23 +140,9 @@ adapter.onItemClick = { any: Any, view: View ->
         count += 1
         if (count >= word.size) count = 0
 
-        /*when {
-            count != 0 -> {
-                masteredWords.add(Card(word[count -1], explanation[count -1], status[0]))
-            }
-            else -> {
-                masteredWords.add(Card(word[word.size -1], explanation[word.size -1], status[0]))
-            }
-        }*/
-
         var nextWord = Card(word[count], explanation[count], status[0])
         //todo выбрали слово, но нужно сделать несколько проверок
 
-
-
-        /*if (randomNumber != 1 && randomNumber != 2) {
-            masteredWords.add(nextWord)
-        }*/
 
         //todo на рандоме может выпасть слово для повторения
         if (randomNumber == 1) {
@@ -152,26 +152,32 @@ adapter.onItemClick = { any: Any, view: View ->
                 //learningWords.removeAt(positionLearning)
             }
         }
-        /*if (randomNumber == 2) {
-            if (masteredWords.isNotEmpty()) {
-                var positionMastered = (0 until masteredWords.size).random()
-                nextWord = masteredWords[positionMastered]
-            }
-        }*/
 
         //todo если изученные содержат уже такое слово, тогда оно будет с приставкой MASTERED
         if (learningWords.contains(Card(word[count],explanation[count], status[1]))) nextWord = Card(word[count],explanation[count], status[1])
         if (masteredWords.contains(nextWord)) nextWord = Card(word[count], explanation[count], status[2])
         cardArrayList.add(nextWord)
 
+        progressLearning = learningWords.size
+        progressBarLearning?.setProgress(progressLearning)
 
+        progressMastered = masteredWords.size
+        progressBar?.setProgress(progressMastered)
 
+        Log.d("dsa", "masterSIZE == ${masteredWords.size}")
+        Log.d("dsa", "masterSIZE == $masteredWords")
         TransitionManager.beginDelayedTransition(binding.listView, Explode())
         adapter.notifyDataSetChanged()
     }
     //todo разобраться со второй кнопкой
 
     if (any == 2) {
+        if (cardArrayList[0].status == status[2]){
+            cardArrayList[0].status = status[0]
+            masteredWords.remove(cardArrayList[0])
+        }
+        if (cardArrayList[0].status == status[2]) masteredWords.remove(cardArrayList[0])
+        Log.d("dsa", "masterSIZE == ${masteredWords.size}")
         Log.d("dsa","learningWordsStart: $learningWords")
         count += 1
         if (count >= word.size) count = 0
@@ -186,14 +192,10 @@ adapter.onItemClick = { any: Any, view: View ->
         }
         Log.d("dsa","learnWordsRemove: $learningWords")
 
-        //добавляет не то, если второй раз нижмаю
-        /*if (count != 0)  learningWords.add(Card(word[count-1],explanation[count-1], status[1]))
-        else learningWords.add(Card(word[word.size -1], explanation[word.size -1], status[1]))*/
-        //todo добавляем не то
         cardArrayList[0].status = status[1]
         learningWords.add(cardArrayList[0])
         Log.d("dsa","learningAdd: $learningWords")
-        //learningWords.add(cardArrayList[0])
+
         cardArrayList.clear()
 
 
@@ -212,9 +214,11 @@ adapter.onItemClick = { any: Any, view: View ->
         Log.d("dsa","learningWordsFINAL: $learningWords")
 
 
+        progressLearning = learningWords.size
+        progressBarLearning?.setProgress(progressLearning)
 
-
-
+        progressMastered = masteredWords.size
+        progressBar?.setProgress(progressMastered)
 
         TransitionManager.beginDelayedTransition(binding.listView, Explode())
         adapter.notifyDataSetChanged()
