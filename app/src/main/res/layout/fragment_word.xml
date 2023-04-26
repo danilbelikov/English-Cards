@@ -83,13 +83,14 @@
         android:progressDrawable="@drawable/custom_progress_bg" />
 
     <ProgressBar
-        android:id="@+id/progress_bar_mastered2"
+        android:id="@+id/progress_bar_learning"
         style="?android:attr/progressBarStyleHorizontal"
 
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_alignParentBottom="true"
-
+android:progress="0"
+        android:max="50"
         android:layout_marginBottom="53dp"
         android:progressDrawable="@drawable/custom_progress_bg_learning" />
 
