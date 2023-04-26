@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity(), Navigator {
         replaceFragment(MainFragment())
 
 
+
     }
 
     private fun replaceFragment(mainFragment: Fragment) {

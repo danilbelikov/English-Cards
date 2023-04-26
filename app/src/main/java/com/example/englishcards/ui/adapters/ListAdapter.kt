@@ -18,31 +18,22 @@ import com.example.englishcards.ui.model.Card
 class ListAdapter(private val context: Activity, private val arrayList: ArrayList<Card>) : ArrayAdapter<Card>(context, R.layout.list_item, arrayList), View.OnClickListener {
     var onItemClick: ((pos: Any,view: View) -> Unit)? = null
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        /*val inflater: LayoutInflater = LayoutInflater.from(context)
+        val view : View = inflater.inflate(R.layout.list_item, null)*/
 
-
-        val inflater: LayoutInflater = LayoutInflater.from(context)
-        val view : View = inflater.inflate(R.layout.list_item, null)
         val binding = convertView?.tag as ListItemBinding? ?:
         createBinding(parent.context)
 
         binding.tvEnglishWord.text = arrayList[position].word
         binding.tvEnglishWordExplanation.text = arrayList[position].explanation
+        binding.tvWordStatus.text = arrayList[position].status
         binding.bKnow.setTag(1)
         binding.bNotKnow.setTag(2)
-        val buttonKnow : Button?= view?.findViewById(R.id.bKnow)
-        /*val buttonKnow : Button?= view?.findViewById(R.id.bKnow)
-        val buttonNotKnow : Button?= view?.findViewById(R.id.bNotKnow)
-        buttonKnow?.setOnClickListener {
-            Toast.makeText(parent.context,"gfdg",Toast.LENGTH_LONG).show()
-        }*/
+
+        if (binding.tvWordStatus.text == "LEARNING") binding.tvWordStatus.setBackgroundResource(R.drawable.rounded_corner_learning)
+        if (binding.tvWordStatus.text == "MASTERED") binding.tvWordStatus.setBackgroundResource(R.drawable.rounded_corner_mastered)
 
 
-        /*val wordView : TextView = view.findViewById(R.id.tvEnglishWord)
-        val explanationView : TextView = view.findViewById(R.id.tvEnglishWordExplanation)
-        val statusView : TextView = view.findViewById(R.id.tvWordStatus)
-        wordView.text = arrayList[position].word
-        explanationView.text = arrayList[position].explanation
-        statusView.text = arrayList[position].status*/
         return binding.root
     }
 

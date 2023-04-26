@@ -19,6 +19,8 @@ import com.example.englishcards.ui.contract.navigator
 import com.example.englishcards.ui.model.CardsIntro
 import com.example.englishcards.ui.word.WordFragment
 
+import com.example.englishcards.ui.word.numberOfMasteredWords
+
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var recyclerView: RecyclerView
@@ -35,6 +37,7 @@ class MainFragment : Fragment() {
         // Inflate the layout for this fragment
         return binding.root
 
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,6 +50,7 @@ class MainFragment : Fragment() {
         var adapter = CardsAdapter(cardsArrayList)
         recyclerView.adapter = adapter
         val button = view?.findViewById<Button>(R.id.buttonPractice)
+
         button?.setOnClickListener {
             navigator().goToCards1()
         }
@@ -78,7 +82,7 @@ class MainFragment : Fragment() {
             getString(R.string.hard_words)
         )
         progress = arrayOf(
-            getString(R.string.progress1),
+            "$numberOfMasteredWords слов из 50 изучено",
             getString(R.string.progress2),
             getString(R.string.progress3)
         )
@@ -86,6 +90,7 @@ class MainFragment : Fragment() {
             val cards = CardsIntro(heading[i], progress[i])
             cardsArrayList.add(cards)
         }
+
 
 
 

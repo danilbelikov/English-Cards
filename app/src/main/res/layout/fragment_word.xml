@@ -7,8 +7,41 @@
     tools:context=".ui.word.WordFragment"
     android:id="@+id/wordFragment"
     android:background="@color/mainBackground">
+    <!--<ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginBottom="212dp"
+        android:progressDrawable="@drawable/custom_progress_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />-->
 
-    <FrameLayout
+<!--    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:id="@+id/relativeItem2"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeItem" >
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="211dp"
+            android:layout_marginBottom="200dp"
+            android:progressDrawable="@drawable/custom_progress_bg" />
+    </RelativeLayout>-->
+
+
+    <RelativeLayout
+        android:id="@+id/relativeItem"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,19 +49,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/list_item"
+            tools:listitem="@layout/list_item" />
+    </RelativeLayout>
 
-            />
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    app:layout_constraintTop_toBottomOf="@id/relativeItem"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
 
-    </FrameLayout>
+    <ProgressBar
+        android:id="@+id/progress_bar_mastered"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+
+
+
+        android:layout_marginBottom="100dp"
+        android:progressDrawable="@drawable/custom_progress_bg" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_mastered2"
+        style="?android:attr/progressBarStyleHorizontal"
+
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginBottom="53dp"
+        android:progressDrawable="@drawable/custom_progress_bg_learning" />
+
+
+</RelativeLayout>
 
 
     <!--<androidx.constraintlayout.widget.ConstraintLayout
