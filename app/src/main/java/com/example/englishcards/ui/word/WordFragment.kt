@@ -1,6 +1,8 @@
 package com.example.englishcards.ui.word
 
 import android.animation.ObjectAnimator
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.transition.Explode
 import android.transition.TransitionManager
@@ -16,6 +18,9 @@ import com.example.englishcards.R
 import com.example.englishcards.databinding.FragmentWordBinding
 import com.example.englishcards.ui.adapters.ListAdapter
 import com.example.englishcards.ui.model.Card
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
 var numberOfMasteredWords = 76
 class WordFragment : Fragment() {
@@ -24,10 +29,27 @@ private lateinit var masteredWords: ArrayList<Card>
 private lateinit var learningWords: ArrayList<Card>
 private lateinit var repeatingWords: ArrayList<Card>
 private lateinit var cardArrayList : ArrayList<Card>
+private lateinit var preferences: SharedPreferences
 lateinit var word: Array<String>
 lateinit var explanation: Array<String>
 lateinit var status: Array<String>
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,22 +58,52 @@ lateinit var status: Array<String>
         // Inflate the layout for this fragment
         binding = FragmentWordBinding.inflate(inflater, container, false)
 
-
         return binding.root
+
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataInitialize()
 
+        dataInitialize()
 
 
         //binding.tvEnglishWord.text = word[0]
 
     }
+    private fun saveData() {
+        numberOfMasteredWords = masteredWords.size
+
+        val sharedPreferences = requireActivity().applicationContext.getSharedPreferences("gfdg", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json = gson.toJson(masteredWords)
+        editor.apply {
+            putString("KEY", json)
+        }.apply()
+    }
+    private fun loadData() {
+
+        val sharedPreferences = requireActivity().applicationContext.getSharedPreferences("gfdg", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("KEY", null)
+        if (json == null) masteredWords = ArrayList<Card>()
+
+        val type: Type = object : TypeToken<ArrayList<Card>>() {}.getType()
+
+       if (json != null) masteredWords = gson.fromJson(json, type)
+
+
+        val progressBar = view?.findViewById<ProgressBar>(R.id.progress_bar_mastered)
+        progressBar?.setProgress(masteredWords.size)
+
+
+
+    }
     private fun dataInitialize(){
         //Списки со словами
+
         masteredWords = ArrayList()
         learningWords = ArrayList()
         cardArrayList = ArrayList()
@@ -84,21 +136,30 @@ lateinit var status: Array<String>
             "LEARNING",
             "MASTERED"
         )
+
         //Вставляем первое слово
         val countRange = (1 until word.size)
         var count = countRange.random()
+        loadData()
+        if (masteredWords.isEmpty())
         cardArrayList.add(Card(word[count], explanation[count], status[0]))
+        else {
+            masteredWords[0].status = status[2]
+            cardArrayList.add(masteredWords[0])
+
+        }
 
         //Адаптер
         val adapter = ListAdapter(requireActivity(), cardArrayList)
         binding.listView.adapter = adapter
 
         //Для передачи на маин активити
-        numberOfMasteredWords = masteredWords.size
+
         //Сколько раз повторили
         var numberOfRepeatings = 0
 
         val progressBar = view?.findViewById<ProgressBar>(R.id.progress_bar_mastered)
+        progressBar?.setProgress(masteredWords.size)
         val progressBarLearning = view?.findViewById<ProgressBar>(R.id.progress_bar_learning)
         var progressMastered = 0
         var progressLearning = 0
@@ -106,11 +167,20 @@ lateinit var status: Array<String>
         progressBar?.max = word.size
         progressBarLearning?.max = word.size
 
+        //if (numberOfMasteredWords == 76) saveData()
+
+
+
+//такксссс
+
+
+
 adapter.onItemClick = { any: Any, view: View ->
     var randomNumber = (0..6).random()
 
 
     if (any == 1) {
+
 
         if (cardArrayList[0].status == status[2]){
             cardArrayList[0].status = status[0]
@@ -166,8 +236,10 @@ adapter.onItemClick = { any: Any, view: View ->
 
         Log.d("dsa", "masterSIZE == ${masteredWords.size}")
         Log.d("dsa", "masterSIZE == $masteredWords")
+        saveData()
         TransitionManager.beginDelayedTransition(binding.listView, Explode())
         adapter.notifyDataSetChanged()
+
     }
     //todo разобраться со второй кнопкой
 
@@ -220,6 +292,7 @@ adapter.onItemClick = { any: Any, view: View ->
         progressMastered = masteredWords.size
         progressBar?.setProgress(progressMastered)
 
+        saveData()
         TransitionManager.beginDelayedTransition(binding.listView, Explode())
         adapter.notifyDataSetChanged()
     }
