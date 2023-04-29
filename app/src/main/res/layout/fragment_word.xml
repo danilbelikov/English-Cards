@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.word.WordFragment"
     android:id="@+id/wordFragment"
-    android:background="@color/mainBackground">
+    android:background="#444444">
     <!--<ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
@@ -42,8 +42,8 @@
 
     <RelativeLayout
         android:id="@+id/relativeItem"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,14 +55,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/list_item" />
+        <!--<ProgressBar
+            android:id="@+id/progress_bar_mastered"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:progressDrawable="@drawable/custom_progress_bg"
+            android:layout_alignBottom="@+id/listView"/>-->
+
+        <!--<ProgressBar
+            android:id="@+id/progress_bar_learning"
+            style="?android:attr/progressBarStyleHorizontal"
+
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:progress="0"
+            android:max="50"
+            android:layout_marginBottom="53dp"
+            android:progressDrawable="@drawable/custom_progress_bg_learning" />-->
+
     </RelativeLayout>
 
-<RelativeLayout
+<!--<RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     app:layout_constraintTop_toBottomOf="@id/relativeItem"
@@ -70,7 +90,8 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent">
 
-    <ProgressBar
+
+    &lt;!&ndash;<ProgressBar
         android:id="@+id/progress_bar_mastered"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
@@ -92,10 +113,8 @@
 android:progress="0"
         android:max="50"
         android:layout_marginBottom="53dp"
-        android:progressDrawable="@drawable/custom_progress_bg_learning" />
-
-
-</RelativeLayout>
+        android:progressDrawable="@drawable/custom_progress_bg_learning" />&ndash;&gt;
+</RelativeLayout>-->
 
 
     <!--<androidx.constraintlayout.widget.ConstraintLayout

@@ -20,20 +20,38 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.027"
         app:cardCornerRadius="8dp"
+        android:backgroundTint="#1a1a1a"
         app:cardElevation="8dp"
         >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
+
+            <!--<ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="55dp"
+                android:scaleType="fitEnd"
+                android:scaleX="1"
+                android:scaleY="1"
+                app:srcCompat="@drawable/pineapple" />-->
+
             <TextView
                 android:id="@+id/tvHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="@string/common_words"
+                android:layout_marginTop="5dp"
                 android:textSize="20sp"
-                android:textColor="@color/black"
+
+
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 >
             </TextView>
@@ -41,12 +59,14 @@
                 android:id="@+id/tvProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="33dp"
                 android:text="@string/_0_50"
+
                 android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textStyle="normal">
+                android:textColor="#b3b3b3"
+                android:textStyle="italic"
+                >
             </TextView>
             <Button
                 android:id="@+id/buttonPractice"
@@ -61,15 +81,20 @@
                 android:text="@string/practice"
                 android:textColor="@color/black"
                 android:backgroundTint="@color/grayProgress"
+                android:visibility="gone"
                 >
             </Button>
+
             <ProgressBar
+                android:id="@+id/progress_main"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginTop="55dp"
+
+                android:max="10"
                 android:progressDrawable="@drawable/custom_progress_bg" />
         </RelativeLayout>
 
