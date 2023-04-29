@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import com.example.englishcards.databinding.ActivityMainBinding
 import com.example.englishcards.ui.contract.Navigator
 import com.example.englishcards.ui.main.MainFragment
 import com.example.englishcards.ui.word.Word2Fragment
@@ -11,10 +12,14 @@ import com.example.englishcards.ui.word.Word3Fragment
 import com.example.englishcards.ui.word.WordFragment
 
 class MainActivity : AppCompatActivity(), Navigator {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
+        //setContentView(R.layout.activity_main)
         if (savedInstanceState == null) replaceFragment(MainFragment())
+
 
 
 

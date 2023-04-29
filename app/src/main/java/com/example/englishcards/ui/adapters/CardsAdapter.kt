@@ -4,12 +4,14 @@ import android.graphics.ColorSpace.Model
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.englishcards.R
 import com.example.englishcards.ui.model.CardsIntro
 import com.example.englishcards.ui.word.WordFragment
+import com.example.englishcards.ui.word.numberOfMasteredWords
 
 class CardsAdapter(private val cardsList: ArrayList<CardsIntro>) :
     RecyclerView.Adapter<CardsAdapter.CardsViewHolder>() {
@@ -38,6 +40,7 @@ class CardsAdapter(private val cardsList: ArrayList<CardsIntro>) :
         val currentItem = cardsList[position]
         holder.tvHeading.text = currentItem.name
         holder.tvProgress.text = currentItem.progress
+        if (position == 0)holder.progressBar.setProgress(numberOfMasteredWords)
     }
 
 
@@ -45,6 +48,9 @@ class CardsAdapter(private val cardsList: ArrayList<CardsIntro>) :
     class CardsViewHolder(itemView: View, listener : OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val tvHeading: TextView = itemView.findViewById(R.id.tvHeading)
         val tvProgress: TextView = itemView.findViewById(R.id.tvProgress)
+        val progressBar = itemView.findViewById<ProgressBar>(R.id.progress_main)
+
+
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)

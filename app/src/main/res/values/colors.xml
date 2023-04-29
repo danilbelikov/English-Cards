@@ -7,8 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="greenProgress">#4dff4d</color>
+    <color name="greenProgress">#41ba7a</color>
     <color name="grayProgress">#e6e6e6</color>
     <color name="mainBackground">#89e8e0</color>
-    <color name="learningBackground">#ffff00</color>
+    <color name="learningBackground">#ff0000</color>
 </resources>
